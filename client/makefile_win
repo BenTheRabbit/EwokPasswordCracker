@@ -1,0 +1,19 @@
+#Compiler path
+CC=gcc
+#Define flag
+CFLAGS=-c -Wall
+
+all: client
+
+client: main.o md5.o
+	$(CC) -L"C:\Program Files (x86)\CodeBlocks\MinGW\lib" -lm -lpthread -lws2_32 main.o md5.o -o client
+#	$(CC) -lpthread -lws2_32 main.o md5.o -o client
+
+main.o: main.c
+	$(CC) $(CFLAGS) main.c
+
+md5.o: md5.h
+	$(CC) $(CFLAGS) md5.c
+
+clean:
+	rm -rf *.o

@@ -1,0 +1,21 @@
+#Compiler path
+CC=gcc
+#Define flag
+CFLAGS=-c -Wall
+
+all: client
+
+client: main.o md5.o data_struct.o
+	$(CC) main.o md5.o data_struct.o -o client -lgmp -lpthread -lm
+
+main.o: sources/main.c
+	$(CC) $(CFLAGS) sources/main.c
+
+md5.o: sources/md5.c
+	$(CC) $(CFLAGS) sources/md5.c
+
+data_struct.o: sources/data_struct.c
+	$(CC) $(CFLAGS) sources/data_struct.c
+
+clean:
+	rm -rf *.o

@@ -1,0 +1,28 @@
+master
+
+master_launch
+	lancer les threads de calcul
+	mettre a jour les range calculé
+	mettre a jour les hash trouvé
+
+	deux while imbriqué
+
+	le premier est un while(1)
+
+	le deuxième ne s'arrête pas tant qu'il y a une ressource libre
+	à la sorti du while il essai de bloquer une mutex. Cette mutex est bloqué (try_lock) par chaque thread de calcul à son lancement 
+	quand un thrread se fini il la délock. Ainsi le main est débloqué, fini le while(1) et recommence le while de lancement
+	
+master_calc
+	
+	prend en argument le hash et le range
+	un gros switch prenant comme argument la type de hash dès le début
+	en fonction du hash
+		préparation
+		while principal - optimisé
+	
+	enregistrer le timer de debut du range au lancement du premier thread
+	le dernier thread change le status du range et marque le timer de fin
+
+
+
