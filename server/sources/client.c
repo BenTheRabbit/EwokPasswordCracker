@@ -265,13 +265,18 @@ void client_connect(void* para)
 
 				if(tmp_hash != NULL && tmp_hash->id == tmp_range->id_hash)
 				{
-					if(tmp_return < TARGET_TIME)
+				//	if(tmp_return < TARGET_TIME)
+				//	{
+				//		cli.idp[tmp_hash->type] += cli.idp[tmp_hash->type] / 100;  
+				//	}
+				//	else if(tmp_return > TARGET_TIME)
+				//	{
+				//		cli.idp[tmp_hash->type] -= cli.idp[tmp_hash->type] / 100;  
+				//	}
+					/** If processing time is too far from target time **/
+					if((tmp_return > TARGET_TIME * 1.05)||(tmp_return < TARGET_TIME * 0.95))
 					{
-						cli.idp[tmp_hash->type] += cli.idp[tmp_hash->type] / 100;  
-					}
-					else if(tmp_return > TARGET_TIME)
-					{
-						cli.idp[tmp_hash->type] -= cli.idp[tmp_hash->type] / 100;  
+						cli.idp[tmp_hash->type] = mpz_get_ui(tmp_range->nb_op) / tmp_return;
 					}
 				}
 
