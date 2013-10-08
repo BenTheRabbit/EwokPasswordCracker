@@ -21,3 +21,6 @@
 # Config files
 */client.conf
 */server.conf
+
+#tmp files
+*.swp

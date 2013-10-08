@@ -1,0 +1,55 @@
+add_hash (POST)
+---------------
+
+remove_hash (DELETE)
+--------------------
+
+update_hash (PUT)
+-----------------
+
+All but state
+
+change_state (PUT) (pause, start)
+------------------
+
+list_hashs (GET)
+----------------
+
+url = list_hash, method = GET
+{
+	"hashs" : [
+		{"id" : "<int>"},
+		{"id" : "<int>"},
+		...
+	]
+}
+
+detail_hash (GET)
+-----------------
+
+url = detail_hash/x
+{
+	"hash" : [
+		{
+			"id" : "<int>",
+			"state" : "started|paused|found|editable",
+			"type" : "md5|...",
+			"method" : "brute_force|dico|hybrid",
+			"charset" : "<char list>",
+			"start_time" : "timestamp",
+			"duration" : "<int>",
+			"hash" : "<string>",
+			"solution" : "<string>"
+		}
+	]
+}
+
+url = detail_hash/all
+Same as above, with many entries
+
+list_clients (GET)
+------------------
+
+detail_client (GET)
+-------------------
+

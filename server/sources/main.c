@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     srv_conf.up_time = time(NULL);
     
 	hash_md5 tt;
-	strcpy(tt.hash,"bc11f06afb9b27070673471a23ecc6a9");
+	strcpy(tt.hash,"a4e18f75fbf0f469c4466d35ca3a0ce0");
 	strcpy(tt.charset, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@!*-$#^?");
 	
 	hash_t test;
