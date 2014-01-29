@@ -24,6 +24,7 @@
 #include "config.h"
 #include "const.h"
 #include "ui.h"
+#include "api_httpd.h"
 
 
 

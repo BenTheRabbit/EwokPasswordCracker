@@ -5,8 +5,8 @@ CFLAGS=-Wall -c
 
 all: server
 
-server: main.o data_struct.o word.o socket.o module_md5.o client.o config.o ui.o system.o
-	$(CC) main.o data_struct.o word.o socket.o module_md5.o client.o config.o ui.o system.o -o server -lncurses -lgmp -lpthread -lform
+server: main.o data_struct.o word.o socket.o module_md5.o client.o config.o ui.o system.o api_httpd.o api_executor.o api_router.o
+	$(CC) main.o data_struct.o word.o socket.o module_md5.o client.o config.o ui.o system.o api_httpd.o api_executor.o api_router.o -o server -lncurses -lgmp -lpthread -lform -lmicrohttpd -ljansson
 
 main.o: sources/main.c
 	$(CC) $(CFLAGS) sources/main.c
@@ -28,6 +28,15 @@ client.o: sources/client.c
     
 config.o: sources/config.c
 	$(CC) $(CFLAGS) sources/config.c
+
+api_httpd.o: sources/api_httpd.c
+	$(CC) $(CFLAGS) sources/api_httpd.c
+
+api_executor.o: sources/api_executor.c
+	$(CC) $(CFLAGS) sources/api_executor.c
+
+api_router.o: sources/api_router.c
+	$(CC) $(CFLAGS) sources/api_router.c
 
 ui.o: sources/ui.c
 	$(CC) $(CFLAGS) sources/ui.c

@@ -10,11 +10,13 @@ int main(int argc, char *argv[])
     socklen_t clilen;
     pthread_t pth_client = 0;
     pthread_t pth_ui = 0;
+    pthread_t pth_api = 0;
     pthread_mutex_t mutex[MUTEX_COUNT];
     
     
 	client_thread_parameter *param_sock;
 	ui_thread_parameter param_ui;
+	api_thread_parameters_t param_api;
     
     struct sockaddr_in cli_addr;
     
@@ -57,7 +59,7 @@ int main(int argc, char *argv[])
     
     
 	hash_t test2;
-	test2.id = 2;
+	test2.id = 25;
 	test2.priority = 1;
 	test2.type = HASH_TYPE_MD5;
 	test2.status = HASH_STATUS_NOT_FOUND;
@@ -80,7 +82,7 @@ int main(int argc, char *argv[])
     
     
 	list_add(&hashs, (void*)(&test));
-	//list_add(&hashs, (void*)(&test2));
+	list_add(&hashs, (void*)(&test2));
 	srv_conf.rev_num = 1;
 	srv_conf.total_priority = 5; // TODO set to 0;
 	mpz_init(srv_conf.total_prior_calc_progress);
@@ -106,11 +108,23 @@ int main(int argc, char *argv[])
     param_ui.mutex = mutex;
     
     pthread_mutex_lock(&mutex[MUTEX_PORT]);
-   	pthread_create(&pth_ui, 0, (void * (*)(void*))&ui_thread, (void*)&param_ui);
-    pthread_detach(pth_ui);
-    pthread_mutex_lock(&mutex[MUTEX_PORT]);
+   //	pthread_create(&pth_ui, 0, (void * (*)(void*))&ui_thread, (void*)&param_ui);
+   // pthread_detach(pth_ui);
+   // pthread_mutex_lock(&mutex[MUTEX_PORT]);
 
     pthread_mutex_unlock(&mutex[MUTEX_PORT]);
+
+
+    /****************/
+    /** Launch GUI **/
+    /****************/
+    
+    param_api.hashes = &hashs;
+    param_api.clients = &clients;
+    param_api.mutexes = mutex;
+    
+   	pthread_create(&pth_api, 0, (void * (*)(void*))&api_httpd_daemon, (void*)&param_api);
+    pthread_detach(pth_api);
     
     /*****************/
     /** Socket init **/
